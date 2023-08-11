@@ -23,3 +23,12 @@ The following are the items that are being evaluated:
 - Modularity
 - Commenting and documentation
 - Testing Strategy
+
+## Overview
+
+Data can be loaded via:
+```
+
+```
+
+This will also output errors to the same directory, and load the data into a database. 

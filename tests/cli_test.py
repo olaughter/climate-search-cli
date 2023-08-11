@@ -20,7 +20,7 @@ def test_load__no_args():
 
 def test_load__missing_file():
     runner = CliRunner()
-    result = runner.invoke(load, ["--localpath", "not-a-file"])
+    result = runner.invoke(load, ["--debug", "--localpath", "not-a-file"])
 
     assert result.exit_code == 2
 
@@ -28,6 +28,6 @@ def test_load__missing_file():
 def test_load__good_file():
     fixture_path = "tests/fixtures/empty_sample.csv"
     runner = CliRunner()
-    result = runner.invoke(load, ["--localpath", fixture_path])
+    result = runner.invoke(load, ["--debug", "--localpath", fixture_path])
 
     assert result.exit_code == 0
