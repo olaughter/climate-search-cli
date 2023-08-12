@@ -1,6 +1,6 @@
 import pickle
 
-from cs.output import build_policy_sequence, build_sumamry_stats
+from cs.output import build_policy_sequence, build_summary_stats
 
 
 def test_build_policy_sequence():
@@ -19,8 +19,13 @@ def test_build_policy_sequence():
         assert type(row["sectors"]) == list
 
 
-def test_build_sumamry_stats():
+def test_build_summary_stats():
     with open("tests/fixtures/rows", "rb") as f:
         rows = pickle.load(f)
 
-    result = build_sumamry_stats(rows)
+    result = build_summary_stats(rows)
+    assert type(result) == dict
+    for field in ["sectors", "totalMatches"]:
+        assert field in result.keys()
+
+    assert len(result["sectors"]) > 0

@@ -1,3 +1,5 @@
+from collections import Counter
+
 from sqlalchemy.engine.row import Row
 
 
@@ -25,5 +27,23 @@ def build_policy_sequence(rows: list[Row]) -> list[dict]:
     return output
 
 
-def build_sumamry_stats(rows):
-    pass
+def build_summary_stats(rows: list[Row]) -> dict:
+    """Build summary stats from a sequence of row objects
+
+    Args:
+        rows (list[Row]): rsults of an sqlalchemy query
+
+    Returns:
+        dict: formatted summary stats
+    """
+    all_sectors = []
+    for row in rows:
+        sectors = row._asdict().get("sectors")
+        all_sectors.extend(sectors.split(";"))
+    sector_counts = Counter(all_sectors)
+    output = {
+        "sectors": sector_counts,
+        "totalMatches": len(rows),
+    }
+
+    return output
