@@ -18,7 +18,7 @@ def cli():
     "--localpath",
     "-p",
     "data",
-    required=True,
+    default="data/data.csv",
     help="local file path for loading policy summaries",
     type=click.File(encoding="utf-8"),
 )
