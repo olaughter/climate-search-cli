@@ -64,11 +64,19 @@ def load(data: TextIO, debug: bool, dbdir: str):
     default="data",
     show_default=True,
 )
-def retrieve(keywords, dbdir):
+@click.option(
+    "--sort",
+    "sort_by_relevancy",
+    help="Order the results by relevancy",
+    default=False,
+    is_flag=True,
+    show_default=True,
+)
+def retrieve(keywords, dbdir, sort_by_relevancy):
     """Query the policy titles and descriptions with keywords"""
     db = DB(dbdir=dbdir)
     rows = db.query_policies(keywords)
-    output = build_output(rows)
+    output = build_output(rows, keywords=keywords, sort_by_relevancy=sort_by_relevancy)
     click.echo(output)
 
 

@@ -1,14 +1,21 @@
 import json
 from collections import Counter
+from typing import Sequence
 
 from sqlalchemy.engine.row import Row
 
+from cs.relevance import transform_for_relevance
 
-def build_output(rows: list[Row]) -> str:
+
+def build_output(
+    rows: list[Row], keywords: Sequence[str], sort_by_relevancy: bool = False
+) -> str:
     """Formats the results ready to be displayed"""
-    results = build_policy_sequence(rows)
+    policies = build_policy_sequence(rows)
+    if sort_by_relevancy:
+        policies = transform_for_relevance(rows, keywords, policies)
     summary = build_summary_stats(rows)
-    summary["matches"] = results
+    summary["matches"] = policies
 
     return json.dumps(summary, indent=2)
 

@@ -7,7 +7,7 @@ def test_build_output():
     with open("tests/fixtures/rows", "rb") as f:
         rows = pickle.load(f)
 
-    result = build_output(rows)
+    result = build_output(rows, keywords=[])
     assert type(result) == str
 
 
