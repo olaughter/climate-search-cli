@@ -27,7 +27,10 @@ def cli():
     help="Debug setting, will run validation but not load to db",
     default=False,
 )
-def load(data: TextIO, debug: bool):
+@click.option(
+    "--dbdir", help="Subfolder to build database", default="data", show_default=True
+)
+def load(data: TextIO, debug: bool, dbdir: str):
     """Loads and validates climate policy summaries"""
     click.echo(f"Validating document: {data.name}")
 
@@ -39,7 +42,7 @@ def load(data: TextIO, debug: bool):
         pr.problem_rows.to_csv(error_out, index=False)
         click.echo(f"Found {len(pr.problem_rows)} issues, writing to: {error_out}")
 
-    db = DB(debug=debug)
+    db = DB(debug=debug, dbdir=dbdir)
     db.df_to_table(pr.df)
 
     click.echo(f"Loaded {len(pr.df)} policies, from {data.name}")

@@ -6,9 +6,8 @@ from cs.db import DB
 
 
 def test_db_build_db_url():
-    result = DB(debug=True).build_db_url()
-    assert result.startswith("sqlite://")
-    assert result.endswith("database.db")
+    result = DB(debug=True).build_db_url("test")
+    assert result == "sqlite:///test/database.db"
 
 
 def test_db_df_to_table():
