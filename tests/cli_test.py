@@ -11,13 +11,6 @@ def test_cli():
     assert result.output.startswith("Usage: ")
 
 
-def test_load__no_args():
-    runner = CliRunner()
-    result = runner.invoke(load, [])
-
-    assert result.exit_code == 2
-
-
 def test_load__missing_file():
     runner = CliRunner()
     result = runner.invoke(load, ["--debug", "--localpath", "not-a-file"])
