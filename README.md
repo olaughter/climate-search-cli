@@ -38,9 +38,9 @@ Data can be loaded via:
 cs load
 ```
 
-This will also output errors to the same directory, and load the data into a database. A custom file can alsi be loaded using the --localpath argument. 
+This will also output errors to the same directory, and load the data into a database. A custom file can also be loaded using the --localpath argument. 
 
-Data can then by queried by passing keywords with the retrieve command:
+Data can then be queried by passing keywords with the retrieve command:
 
 ```
 cs retrieve -k green -k energy
@@ -55,7 +55,7 @@ cs retrieve -k forests --sort
 
 ## Time taken
 
-I worked intermittently on this over the course of a couple of days. I think the total time actively working on the solution was about 6 hours. (Not including time spent reading the brief, researching and planning). I could keep going, but I went over the suggested timeframe, so leaving it here. Some key items I'd like to improve include error handling and the relevency algorithm.
+I worked intermittently on this over the course of a couple of days. I think the total time actively working on the solution was about 6 hours. (Not including time spent reading the brief, researching and planning). I could keep going, but I went over the suggested timeframe, so I'm leaving it here. Some key items I'd like to improve include error handling and the relevancy algorithm.
 
 ## alternate ways of running
 
