@@ -3,6 +3,7 @@ from typing import TextIO
 import click
 
 from cs.db import DB
+from cs.output import build_output
 from cs.policy_reader import PolicyReader
 from cs.utils import error_file_name
 
@@ -67,6 +68,8 @@ def retrieve(keywords, dbdir):
     """Query the policy titles and descriptions with keywords"""
     db = DB(dbdir=dbdir)
     rows = db.query_policies(keywords)
+    output = build_output(rows)
+    click.echo(output)
 
 
 def entrypoint():

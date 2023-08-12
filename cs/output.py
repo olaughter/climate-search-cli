@@ -1,6 +1,16 @@
+import json
 from collections import Counter
 
 from sqlalchemy.engine.row import Row
+
+
+def build_output(rows: list[Row]) -> str:
+    """Formats the results ready to be displayed"""
+    results = build_policy_sequence(rows)
+    summary = build_summary_stats(rows)
+    summary["matches"] = results
+
+    return json.dumps(summary, indent=2)
 
 
 def build_policy_sequence(rows: list[Row]) -> list[dict]:
@@ -20,7 +30,6 @@ def build_policy_sequence(rows: list[Row]) -> list[dict]:
             "policyTitle": dict_row["policy_title"],
             "policyId": dict_row["policy_id"],
             "sectors": dict_row["sectors"].split(";"),
-            "descriptionText": dict_row["description_text"],
         }
 
         output.append(output_row)
