@@ -11,22 +11,6 @@ def test_db_build_db_url():
     assert result.endswith("database.db")
 
 
-def test_db_to_database():
-    db = DB(debug=True)
-    df = pd.read_csv("tests/fixtures/valid.csv")
-
-    db.to_database(df)
-
-    with db.engine.connect() as conn:
-        policy = Table(db.POLICY, MetaData(), autoload_with=conn.engine)
-        rows = conn.execute(select(policy)).fetchall()
-        assert len(rows) > 0
-
-        sector = Table(db.SECTOR, MetaData(), autoload_with=conn.engine)
-        rows = conn.execute(select(sector)).fetchall()
-        assert len(rows) > 0
-
-
 def test_db_df_to_table():
     db = DB(debug=True)
     df = pd.read_csv("tests/fixtures/valid.csv")

@@ -40,7 +40,7 @@ def load(data: TextIO, debug: bool):
         click.echo(f"Found {len(pr.problem_rows)} issues, writing to: {error_out}")
 
     db = DB(debug=debug)
-    db.to_database(pr.df)
+    db.df_to_table(pr.df)
 
     click.echo(f"Loaded {len(pr.df)} policies, from {data.name}")
 
