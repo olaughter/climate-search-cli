@@ -25,7 +25,7 @@ The following are the items that are being evaluated:
 - Testing Strategy
 
 
-## Overview
+## Run
 
 Run poetry to install dependencies, (see below for other ways of running):
 ```
@@ -52,6 +52,9 @@ This will display the policies that match. Results can also be sorted with:
 cs retrieve -k forests --sort
 ```
 
+## Solution Overview
+
+I decided to use click as the cli tool for this project. As well as sqlite as a backend, both of these are simple and portable, although if I could start again, I'd be keen to use a database that had support for arrays. Transformations and schema definitions where done in pandas for convenience, I originally started going down the path of having multiple tables in the database, but decided this was over optimising for what was needed with the given timeframe. Having just one table meant pandas was a straightoferward option for defining the table. The search relevency implementation is just a quick tfidf algorithm on the results.
 
 ## Time taken
 
