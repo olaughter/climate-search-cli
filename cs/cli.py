@@ -51,6 +51,10 @@ def load(data: TextIO, debug: bool):
     click.echo(f"Loaded {len(pr.df)} policies")
 
 
-if __name__ == "__main__":
+def entrypoint():
     cli.add_command(load)
     cli()
+
+
+if __name__ == "__main__":
+    entrypoint()
