@@ -4,7 +4,6 @@ import click
 
 from cs.db import DB
 from cs.policy_reader import PolicyReader
-from cs.schema import Schema
 from cs.utils import error_file_name
 
 
@@ -40,15 +39,10 @@ def load(data: TextIO, debug: bool):
         pr.problem_rows.to_csv(error_out, index=False)
         click.echo(f"Found {len(pr.problem_rows)} issues, writing to: {error_out}")
 
-    schema = Schema()
-    policy = schema.policy(pr.df)
-    sector = schema.sector(pr.df)
-
     db = DB(debug=debug)
-    db.df_to_table(policy, "policy")
-    db.df_to_table(sector, "sector")
+    db.to_database(pr.df)
 
-    click.echo(f"Loaded {len(pr.df)} policies")
+    click.echo(f"Loaded {len(pr.df)} policies, from {data.name}")
 
 
 def entrypoint():
