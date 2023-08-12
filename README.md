@@ -71,3 +71,11 @@ docker build -t climate-search-cli:latest .
 docker run climate-search-cli:latest load
 docker run climate-search-cli:latest retrieve -k cycling -k health --sort
 ```
+
+### pypi
+
+Also [available on pypi](https://pypi.org/project/climate-search-cli/):
+
+```
+pip install climate-search-cli
+```

@@ -1,3 +1,4 @@
+import os
 from typing import TextIO
 
 import click
@@ -5,7 +6,9 @@ import click
 from cs.db import DB
 from cs.output import build_output
 from cs.policy_reader import PolicyReader
-from cs.utils import error_file_name
+from cs.utils import error_file_name, get_data_dir
+
+DATA_DIR = get_data_dir()
 
 
 @click.group()
@@ -18,7 +21,7 @@ def cli():
     "--localpath",
     "-p",
     "data",
-    default="data/data.csv",
+    default=os.path.join(DATA_DIR, "data.csv"),
     help="local file path for loading policy summaries",
     type=click.File(encoding="utf-8"),
 )
@@ -29,7 +32,7 @@ def cli():
     default=False,
 )
 @click.option(
-    "--dbdir", help="Subfolder to build database", default="data", show_default=True
+    "--dbdir", help="Subfolder to build database", default=DATA_DIR, show_default=True
 )
 def load(data: TextIO, debug: bool, dbdir: str):
     """Loads and validates climate policy summaries"""
@@ -61,7 +64,7 @@ def load(data: TextIO, debug: bool, dbdir: str):
 @click.option(
     "--dbdir",
     help="Subfolder to find an existing database in",
-    default="data",
+    default=DATA_DIR,
     show_default=True,
 )
 @click.option(

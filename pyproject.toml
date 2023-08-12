@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "climate-search-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "A python program that can be run from the command line, and used to search climate policy documents."
 authors = ["fred oloughlin <fred@oloughl.in>"]
 license = "Apache-2.0"
