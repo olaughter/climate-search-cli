@@ -27,7 +27,7 @@ The following are the items that are being evaluated:
 
 ## Overview
 
-Run poetry to install dependencies:
+Run poetry to install dependencies, (see below for other ways of running):
 ```
 poetry install
 poetry shell
@@ -57,6 +57,17 @@ cs retrieve -k forests --sort
 
 I worked intermittently on this over the course of a couple of days. I think the total time actively working on the solution was about 6 hours. (Not including time spent reading the brief, researching and planning). I could keep going, but I went over the suggested timeframe, so leaving it here. Some key items I'd like to improve include error handling and the relevency algorithm.
 
+## alternate ways of running
+
+### Docker
+
+This can also be run via docker:
+
+```
+docker build -t climate-search-cli:latest .
 ```
 
-This will also output errors to the same directory, and load the data into a database. 
+```
+docker run climate-search-cli:latest load
+docker run climate-search-cli:latest retrieve -k cycling -k health --sort
+```
