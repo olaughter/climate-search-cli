@@ -48,8 +48,30 @@ def load(data: TextIO, debug: bool, dbdir: str):
     click.echo(f"Loaded {len(pr.df)} policies, from {data.name}")
 
 
+@click.command()
+@click.option(
+    "--keyword",
+    "-k",
+    "keywords",
+    multiple=True,
+    required=True,
+    help="Keyword to search with, can be used multiple times, for example: -k key -k word",
+)
+@click.option(
+    "--dbdir",
+    help="Subfolder to find an existing database in",
+    default="data",
+    show_default=True,
+)
+def retrieve(keywords, dbdir):
+    """Query the policy titles and descriptions with keywords"""
+    db = DB(dbdir=dbdir)
+    rows = db.query_policies(keywords)
+
+
 def entrypoint():
     cli.add_command(load)
+    cli.add_command(retrieve)
     cli()
 
 

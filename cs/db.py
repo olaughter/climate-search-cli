@@ -1,7 +1,8 @@
 import os
 
 import pandas as pd
-from sqlalchemy import create_engine
+from sqlalchemy import MetaData, create_engine, or_, select
+from sqlalchemy.schema import Table
 
 POLICY_TABLE = "policy"
 
@@ -29,3 +30,20 @@ class DB:
                 index=False,
                 if_exists="replace",
             )
+
+    def query_policies(self, keywords):
+        """Keyword search for matching policies
+
+        Builds sql that will return rows with any keyword in either title or description
+        """
+        with self.engine.connect() as conn:
+            policy = Table(POLICY_TABLE, MetaData(), autoload_with=conn.engine)
+
+            query = select(policy).where(
+                or_(
+                    *[policy.c.policy_title.contains(k) for k in keywords],
+                    *[policy.c.description_text.contains(k) for k in keywords],
+                )
+            )
+            rows = conn.execute(query).fetchall()
+            return rows
