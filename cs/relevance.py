@@ -26,8 +26,8 @@ def transform_for_relevance(
 
     results = cosine_similarity(vec, qvec)
 
-    for i, [score] in enumerate(results.tolist()):
-        policies[i]["relevance"] = score
+    for i, score in enumerate(results.tolist()):
+        policies[i]["relevance"] = sum(score)
 
     sorted_policies = sorted(policies, key=lambda v: v["relevance"], reverse=True)
     return sorted_policies
