@@ -17,12 +17,17 @@ class DB:
             db_path = self.build_db_url()
             self.engine = create_engine(db_path, echo=False)
 
-    def build_db_url(self):
+    def build_db_url(self) -> str:
+        """Creates the database url string"""
         db_path = os.path.join("data", "database.db")
         db_url = f"sqlite:///{db_path}"
         return db_url
 
     def to_database(self, df):
+        """Loads tables to database
+
+        Based on their pandas table transformed in Schema
+        """
         schema = Schema()
 
         policy = schema.policy(df)
@@ -32,6 +37,7 @@ class DB:
         self.df_to_table(df=sector, table_name=self.SECTOR)
 
     def df_to_table(self, df: pd.DataFrame, table_name: str):
+        """Load an individual pandas dataframe to the database"""
         with self.engine.connect() as conn:
             df.to_sql(
                 table_name,
