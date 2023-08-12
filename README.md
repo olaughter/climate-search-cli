@@ -24,10 +24,38 @@ The following are the items that are being evaluated:
 - Commenting and documentation
 - Testing Strategy
 
+
 ## Overview
+
+Run poetry to install dependencies:
+```
+poetry install
+poetry shell
+```
 
 Data can be loaded via:
 ```
+cs load
+```
+
+This will also output errors to the same directory, and load the data into a database. A custom file can alsi be loaded using the --localpath argument. 
+
+Data can then by queried by passing keywords with the retrieve command:
+
+```
+cs retrieve -k green -k energy
+```
+
+This will display the policies that match. Results can also be sorted with:
+
+```
+cs retrieve -k forests --sort
+```
+
+
+## Time taken
+
+I worked intermittently on this over the course of a couple of days. I think the total time actively working on the solution was about 6 hours. (Not including time spent reading the brief, researching and planning). I could keep going, but I went over the suggested timeframe, so leaving it here. Some key items I'd like to improve include error handling and the relevency algorithm.
 
 ```
 
