@@ -10,5 +10,5 @@ def error_file_name(original: str) -> str:
 def get_data_dir() -> str:
     """Returns the data directory as an absolute path"""
     current_dir = os.path.dirname(os.path.abspath(__file__))
-    data_dir = os.path.join(current_dir, "..", "data")
+    data_dir = os.path.join(current_dir, "data")
     return data_dir

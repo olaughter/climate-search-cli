@@ -31,7 +31,7 @@ def test_load__good_file():
 
 
 def test_retrieve__without_load():
-    with TemporaryDirectory(dir="data") as tempdir:
+    with TemporaryDirectory(dir="cs/data") as tempdir:
         # Create a table so queries will not fail
         fixture_path = "tests/fixtures/empty_sample.csv"
         engine = create_engine(f"sqlite:///{tempdir}/database.db", echo=True)
