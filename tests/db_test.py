@@ -33,7 +33,7 @@ def test_db_df_to_table():
     db.df_to_table(df, "test")
 
     with db.engine.connect() as conn:
-        test = Table("test", MetaData(), autoload_with=db.engine)
+        test = Table("test", MetaData(), autoload_with=conn.engine)
         assert test.columns.keys() == [
             "policy_id",
             "policy_title",
