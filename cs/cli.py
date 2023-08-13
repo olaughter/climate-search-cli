@@ -34,7 +34,12 @@ def cli():
 @click.option(
     "--dbdir", help="Subfolder to build database", default=DATA_DIR, show_default=True
 )
-def load(data: TextIO, debug: bool, dbdir: str):
+@click.option(
+    "--errdir",
+    help="Subfolder to write errors to, defaults to the same folder as the original file",
+    default=None,
+)
+def load(data: TextIO, debug: bool, dbdir: str, errdir: str):
     """Loads and validates climate policy summaries"""
     click.echo(f"Validating document: {data.name}")
 
@@ -42,7 +47,7 @@ def load(data: TextIO, debug: bool, dbdir: str):
     pr.validate()
 
     if not pr.problem_rows.empty:
-        error_out = error_file_name(original=data.name)
+        error_out = error_file_name(original=data.name, errdir=errdir)
         pr.problem_rows.to_csv(error_out, index=False)
         click.echo(f"Found {len(pr.problem_rows)} issues, writing to: {error_out}")
 
