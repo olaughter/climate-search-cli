@@ -24,16 +24,17 @@ The following are the items that are being evaluated:
 - Commenting and documentation
 - Testing Strategy
 
-
 ## Run
 
 Run poetry to install dependencies, (see below for other ways of running):
+
 ```
 poetry install
 poetry shell
 ```
 
 Data can be loaded via:
+
 ```
 cs load
 ```
@@ -50,6 +51,12 @@ This will display the policies that match. Results can also be sorted with:
 
 ```
 cs retrieve -k forests --sort
+```
+
+The test directory contains both unit and integration tests, these can be run with pytest:
+
+```
+pytest
 ```
 
 ## Solution Overview
